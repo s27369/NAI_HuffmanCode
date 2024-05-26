@@ -2,10 +2,16 @@ class Node:
     def __init__(self, s: str, num: int):
         self.s = s
         self.num = num
-        self.next = None
+        self.next = None #for queue
+        self.left_child = None #for binary tree
+        self.right_child = None #for binary tree
+
 
     def join_with_older(self, older_node):
-        return Node(self.get_s() + older_node.get_s(), self.get_num() + older_node.get_num())
+        n = Node(self.get_s() + older_node.get_s(), self.get_num() + older_node.get_num())
+        n.left_child = self
+        n.right_child = older_node
+        return n
 
     def comes_after(self, node):
         return (
@@ -27,7 +33,7 @@ class Node:
         return self.s
 
 
-class Queue:
+class MyQueue:
     def __init__(self):
         self.head = None
 
@@ -58,12 +64,14 @@ class Queue:
                     current.next = node
                     node.next = next
                     return
+                current=next
             current.next = node
 
     def enqueue_raw(self, s: str, num: int):
         self.enqueue(Node(s, num))
 
     def dequeue(self) -> Node:
+        if self.head is None: return None
         result = self.head
         self.head = self.head.get_next()
         return result

@@ -3,7 +3,7 @@ from HuffmanEncoder import HuffmanEncoder
 
 def interface(he:HuffmanEncoder):
 
-    while r := int(input("1 - enter string\n2 - quit\n>>>")):
+    while r := input("1 - enter string\n2 - quit\n>>>"):
         if r=="1":
             r = input("string to code>>>")
             he.encode(r)
