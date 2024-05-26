@@ -11,6 +11,15 @@ class HuffmanEncoder:
         occurences = self.get_letter_dict(s)
         q = self.get_letter_queue(occurences)
 
+        while q.has_2_more():
+            first, second = q.dequeue(), q.dequeue()
+            if first.get_num()==second.get_num():
+                pass
+            else:
+                younger, older = (first, second) if first.get_num() < second.get_num() else (second, first)
+                new_node = younger.join_with_older(older)
+                q.enqueue(new_node)
+
         pass
     def get_letter_dict(self, s):
         return {x:s.count(x) for x in s}
