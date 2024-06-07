@@ -24,7 +24,10 @@ class HuffmanEncoder:
 
         codes = {}
         root = q.dequeue()
-        self.generate_codes(root, "", codes)
+        if root.left_child is None and root.right_child is None:
+            self.generate_codes(root, "0", codes)
+        else:
+            self.generate_codes(root, "", codes)
         encoded_s = self.get_encoded_str(s, codes)
         print(f"Original string: {original_s}")
         print(f"Encoded string(length: {len(encoded_s)}): {encoded_s}")
